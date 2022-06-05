@@ -1,21 +1,21 @@
-def max_path(row, col):
-    if row == _size - 1:
-        return _triangle[row][col]
+size = int(input())
+card =[]
+for _ in range(size):
+    card.append(list(map(int, input().split())))
 
-    if _memo[row][col] == 0:
-        _memo[row][col] = _triangle[row][col] + max(max_path(row + 1, col), max_path(row + 1, col + 1))
+memo = []
+for i in range(1, size + 1):
+    memo.append([None] * i)
 
-    return _memo[row][col]
+
+def tri(row, col):
+    if row == size - 1:
+        return card[row][col]
+    max_result = 0
+    if memo[row][col] is None:
+        max_result = card[row][col] + max(tri(row+1,col), tri(row+1,col+1))
+        memo[row][col] = max_result
+    return memo[row][col]
 
 
-_triangle = []
-_size = int(input())
-_memo = []
-for i in range(_size):
-    b = [0 for _ in range(i+1)]
-    _memo.append(b)
-
-for _ in range(_size):
-    _triangle.append(list(map(int, input().split())))
-
-print(max_path(0, 0))
+print(tri(0,0))
