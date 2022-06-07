@@ -1,17 +1,14 @@
 n = int(input())
-card = []
 result = []
-for _ in range(n):
-    card.append(int(input()))
 a = 1
-b = n
 data = []
 for i in range(n):
-    while a <= card[i]:
+    card = int(input())
+    while a <= card:
         result.append(a)
         data.append('+')
         a += 1
-    if card[i] == result[-1]:
+    if card == result[-1]:
         result.pop()
         data.append('-')
     else:
