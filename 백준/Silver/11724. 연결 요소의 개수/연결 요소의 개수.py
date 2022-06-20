@@ -1,5 +1,4 @@
 import sys
-sys.setrecursionlimit(10000)
 
 n, m = map(int, sys.stdin.readline().split())
 card = [[] for _ in range(n+1)]
@@ -11,13 +10,24 @@ for _ in range(m):
 visit = [False] * (n+1)
 
 
+# def dfs(graph, start):
+#     if start == n+1:
+#         return
+#     visit[start] = True
+#     for i in graph[start]:
+#         if not visit[i]:
+#             dfs(graph, i)
+
+
 def dfs(graph, start):
-    if start == n+1:
-        return
+    stack = [start]
     visit[start] = True
-    for i in graph[start]:
-        if not visit[i]:
-            dfs(graph, i)
+    while stack:
+        v = stack.pop()
+        for i in graph[v]:
+            if not visit[i]:
+                stack.append(i)
+                visit[i] = True
 
 
 cnt = 0
